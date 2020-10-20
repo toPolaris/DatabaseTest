@@ -1,6 +1,8 @@
 package com.example.databasetest
 
+import android.app.NotificationManager
 import android.content.ContentValues
+import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
@@ -14,6 +16,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         val dbHelper = MyDatabaseHelper(this, "BookStore.db", 3)
+
         createDatabase.setOnClickListener {
             dbHelper.writableDatabase
         }
@@ -76,12 +79,7 @@ class MainActivity : AppCompatActivity() {
 //                    // 在这里手动抛出一个异常，让事务失败
 //                    throw NullPointerException()
 //                }
-                val values = cvOf(
-                    "name" to "Game of Thrones",
-                    "author" to "George Martin",
-                    "pages" to 720,
-                    "price" to 20.85
-                )
+                val values = cvOf("name" to "Game of Thrones", "author" to "George Martin", "pages" to 720, "price" to 20.85)
                 db.insert("Book", null, values)
                 db.setTransactionSuccessful() // 事务已经执行成功
             } catch (e: Exception) {
